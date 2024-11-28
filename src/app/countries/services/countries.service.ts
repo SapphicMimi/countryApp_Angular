@@ -10,6 +10,15 @@ export class CountriesService {
 
   constructor(private httpClient: HttpClient) { }
 
+  searchCountryByAlphaCode(code: string): Observable<Country[]> {
+    const url: string = `${this.apiUrl}/alpha/${code}`;
+
+    return this.httpClient.get<Country[]>(url)
+    .pipe(
+      catchError(() => ([]))
+    );
+  }
+
   searchCapital(term: string): Observable<Country[]> {
     const url: string = `${this.apiUrl}/capital/${term}`;
 
